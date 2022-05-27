@@ -4,5 +4,8 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="hello_blank_fragment">Hello list</string>
+    <string name="about_title">Information about this application</string>
+    <string name="create_title">Creating event at location</string>
+    <string name="add_image">Add image</string>
 
 </resources>

@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import com.example.newsonmap.R
 import com.example.newsonmap.databinding.FragmentMapsBinding
 import com.example.newsonmap.ui.details.CreateNewsDialog
-import com.example.newsonmap.ui.details.CreateNewsFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
