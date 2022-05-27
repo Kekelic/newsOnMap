@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "475740012956",
+    "project_id": "fir-authentication-e9ad3",
+    "storage_bucket": "fir-authentication-e9ad3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475740012956:android:03a193d87720702cbdc859",
+        "android_client_info": {
+          "package_name": "com.example.newsonmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475740012956-fkdipemdme1kk9rvvi0lsp54bb2lm7oh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.newsonmap",
+            "certificate_hash": "ca2cb17f82b33ee916948cc1d73c2133798f938a"
+          }
+        },
+        {
+          "client_id": "475740012956-tlcncqcu8tnj44jahdook18hj98emsr0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQVnGZkYaqsrFwOFVd3gXu9fNN8Pjut8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475740012956-tlcncqcu8tnj44jahdook18hj98emsr0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NewsOnMap</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="hello_blank_fragment">Hello list</string>
+
+</resources>

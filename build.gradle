@@ -1,0 +1,49 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        //firebase
+        google()  // Google's Maven repository
+
+    }
+
+    ext{
+        //google services for firebase
+        google_services_version = '4.3.10'
+        google_services = "com.google.gms:google-services:$google_services_version"
+
+        //firebase
+        firebase_bom_version = '30.0.0'
+        firebase_auth_ktx_version = '21.0.1'
+        firebase_database_verison = '20.0.5'
+        firebase_firestore_ktx_version = '24.1.2'
+
+        firebase_bom = "com.google.firebase:firebase-bom:$firebase_bom_version"
+        firebase_analytics_ktx = 'com.google.firebase:firebase-analytics-ktx'
+        firebase_auth_ktx = "com.google.firebase:firebase-auth-ktx:$firebase_auth_ktx_version"
+        firebase_database = "com.google.firebase:firebase-database:$firebase_database_verison"
+        firebase_firestore_ktx = "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_ktx_version"
+    }
+
+    dependencies {
+        //firebase
+        //classpath 'com.google.gms:google-services:4.3.10'
+
+        //google services for firebase
+        classpath google_services
+
+    }
+}
+
+
+
+plugins {
+    id 'com.android.application' version '7.1.2' apply false
+    id 'com.android.library' version '7.1.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
