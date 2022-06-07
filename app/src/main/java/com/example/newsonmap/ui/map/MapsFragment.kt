@@ -109,24 +109,19 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
     }
 
     override fun onMapClick(latLng: LatLng) {
+        val address = getAddress(latLng.latitude, latLng.longitude)
         val markerOptions = MarkerOptions().position(latLng).title("news here")
             .icon(bitmapDescriptorFromVector(R.drawable.news))
-            .snippet(getAddress(latLng.latitude, latLng.longitude))
+            .snippet(address)
         map.animateCamera(CameraUpdateFactory.newLatLng(latLng))
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
         map.addMarker(markerOptions)
 
-        var dialog = CreateNewsDialog()
+        val dialog = CreateNewsDialog(latLng, address)
         dialog.show(requireActivity().supportFragmentManager, "My dialog")
-//        replaceFragment(CreateNewsFragment(), "create news")
     }
 
-    private fun replaceFragment(fragment: Fragment, title: String){
-        val fragmentManager = requireActivity().supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout, fragment)
 
-    }
 
     private fun bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(requireContext(), vectorResId)?.run {
@@ -145,6 +140,7 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
         ).show()
         return true
     }
+
 
 
 }

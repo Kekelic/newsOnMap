@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1000)
             return
         }
+
     }
 
     override fun onRequestPermissionsResult(
