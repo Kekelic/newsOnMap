@@ -2,6 +2,7 @@ package com.example.newsonmap.ui.details
 
 import android.app.Activity.RESULT_OK
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
@@ -21,12 +22,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class CreateNewsDialog(private val latLng: LatLng,private val address: String) : DialogFragment() {
+class CreateNewsDialog(
+    private val latLng: LatLng,
+    private val address: String,
+    private val onCreateNewsListener: OnCreateNewsListener
+) : DialogFragment() {
 
     private lateinit var binding: DialogCreateNewsBinding
     private var imageUri: Uri? = null
@@ -39,9 +45,10 @@ class CreateNewsDialog(private val latLng: LatLng,private val address: String) :
     ): View? {
         binding = DialogCreateNewsBinding.inflate(layoutInflater)
 
-        binding.ibAddImage.setOnClickListener{openGallery()}
+        binding.ibAddImage.setOnClickListener { openGallery() }
 
         binding.btnCreate.setOnClickListener { saveData() }
+        binding.btnCancel.setOnClickListener { this.dismiss() }
 
         return binding.root
     }
@@ -55,16 +62,24 @@ class CreateNewsDialog(private val latLng: LatLng,private val address: String) :
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == 100) {
             imageUri = data?.data
+            binding.ivImage.setImageURI(imageUri)
         }
     }
 
     private fun saveData() {
+
+        //TODO check low connection
+        val progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Creating ...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
         val title = binding.etCreateTitle.text.toString().trim()
         val description = binding.etCreateDescription.text.toString()
         val date: String
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm")
-            date =  LocalDateTime.now().format(formatter)
+            date = LocalDateTime.now().format(formatter)
         } else {
             val formatter = SimpleDateFormat("dd.MM.yyyy. HH:mm")
             date = formatter.format(Date())
@@ -73,8 +88,9 @@ class CreateNewsDialog(private val latLng: LatLng,private val address: String) :
         val user = FirebaseAuth.getInstance().currentUser
 
         val db = Firebase.firestore
+        val documentId = latLng.latitude.toString() + latLng.longitude.toString()
         val documentReference =
-            db.collection("news").document(latLng.latitude.toString() + latLng.longitude.toString())
+            db.collection("news").document(documentId)
 
 
         val news = hashMapOf(
@@ -82,17 +98,24 @@ class CreateNewsDialog(private val latLng: LatLng,private val address: String) :
             "title" to title,
             "description" to description,
             "address" to address,
-            "date" to date
+            "date" to date,
+            "latitude" to latLng.latitude,
+            "longitude" to latLng.longitude
         )
         documentReference.set(news)
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "News added")
-                Toast.makeText(context, title, Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
 
+        val storageReference = FirebaseStorage.getInstance().getReference("images/$documentId")
+        imageUri?.let { storageReference.putFile(it) }
+
+        progressDialog.dismiss()
+        onCreateNewsListener.createMarker(latLng)
+        dialog!!.dismiss()
 
     }
 

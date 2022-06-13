@@ -67,5 +67,7 @@ dependencies {
     implementation firebase_auth_ktx
     implementation firebase_database
     implementation firebase_firestore_ktx
+    // When using the BoM, you don't specify versions in Firebase library dependencies -TODO fix
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
 }

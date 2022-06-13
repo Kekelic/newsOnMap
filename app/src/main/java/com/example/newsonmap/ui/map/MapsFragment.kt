@@ -1,11 +1,13 @@
 package com.example.newsonmap.ui.map
 
+import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment
 import com.example.newsonmap.R
 import com.example.newsonmap.databinding.FragmentMapsBinding
 import com.example.newsonmap.ui.details.CreateNewsDialog
+import com.example.newsonmap.ui.details.OnCreateNewsListener
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,9 +27,12 @@ import com.google.android.gms.maps.GoogleMap.*
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
-class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
+class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener, OnCreateNewsListener {
 
     private lateinit var binding: FragmentMapsBinding
 
@@ -40,7 +46,8 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
         map = googleMap
 
         val latLng = LatLng(currentLocation?.latitude!!, currentLocation?.longitude!!)
-        val markerOption = MarkerOptions().position(latLng).title("I am here").snippet(getAddress(latLng.latitude, latLng.longitude))
+        val markerOption = MarkerOptions().position(latLng).title("I am here")
+            .snippet(getAddress(latLng.latitude, latLng.longitude))
         map.animateCamera(CameraUpdateFactory.newLatLng(latLng))
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
         map.addMarker(markerOption)
@@ -48,10 +55,37 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
         map.setOnMarkerClickListener(this)
 
 
+        loadNews()
+
 
 //        val sydney = LatLng(-34.0, 151.0)
 //        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
 //        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    }
+
+    private fun loadNews() {
+
+        val user = FirebaseAuth.getInstance().currentUser
+        val db = Firebase.firestore
+        val documentReference = db.collection("news")
+        documentReference.get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        val latitude = document["latitude"].toString().toDouble()
+                        val longitude = document["longitude"].toString().toDouble()
+                        makeMarker(LatLng(latitude , longitude))
+                        Log.d(ContentValues.TAG, "No such document")
+                    }
+
+//                    binding.etAccountFirstname.setText(document["firstname"].toString())
+                } else {
+                    Log.d(ContentValues.TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "get failed with ", exception)
+            }
     }
 
     override fun onCreateView(
@@ -61,7 +95,8 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
     ): View? {
         binding = FragmentMapsBinding.inflate(layoutInflater)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
         //fetchLocation()
 
         return binding.root
@@ -89,10 +124,11 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
         ) {
             val task = fusedLocationProviderClient?.lastLocation
             task?.addOnSuccessListener { location ->
-                if(location != null){
+                if (location != null) {
                     this.currentLocation = location
 
-                    val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+                    val mapFragment =
+                        childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
                     mapFragment?.getMapAsync(callback)
                 }
             }
@@ -102,7 +138,7 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
     }
 
 
-    private fun getAddress(lat: Double, lon: Double): String{
+    private fun getAddress(lat: Double, lon: Double): String {
         val geoCoder = Geocoder(context, Locale.getDefault())
         val addresses = geoCoder.getFromLocation(lat, lon, 1)
         return addresses[0].getAddressLine(0).toString()
@@ -110,29 +146,23 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
 
     override fun onMapClick(latLng: LatLng) {
         val address = getAddress(latLng.latitude, latLng.longitude)
-        val markerOptions = MarkerOptions().position(latLng).title("news here")
-            .icon(bitmapDescriptorFromVector(R.drawable.news))
-            .snippet(address)
-        map.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        map.addMarker(markerOptions)
 
-        val dialog = CreateNewsDialog(latLng, address)
+        val dialog = CreateNewsDialog(latLng, address, this)
         dialog.show(requireActivity().supportFragmentManager, "My dialog")
     }
-
 
 
     private fun bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(requireContext(), vectorResId)?.run {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            val bitmap =
+                Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
             draw(Canvas(bitmap))
             BitmapDescriptorFactory.fromBitmap(bitmap)
         }
     }
 
-    override fun onMarkerClick(latLng: Marker): Boolean {
+    override fun onMarkerClick(marker: Marker): Boolean {
         Toast.makeText(
             context,
             "You clicked on marker",
@@ -141,6 +171,22 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener{
         return true
     }
 
+    override fun createMarker(latLng: LatLng) {
+        val address = getAddress(latLng.latitude, latLng.longitude)
+        val markerOptions = MarkerOptions().position(latLng).title("news here")
+            .icon(bitmapDescriptorFromVector(R.drawable.news))
+            .snippet(address)
+        map.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        map.addMarker(markerOptions)
+    }
 
+    private fun makeMarker(latLng: LatLng) {
+        val address = getAddress(latLng.latitude, latLng.longitude)
+        val markerOptions = MarkerOptions().position(latLng).title("news here")
+            .icon(bitmapDescriptorFromVector(R.drawable.news))
+            .snippet(address)
+        map.addMarker(markerOptions)
+    }
 
 }
