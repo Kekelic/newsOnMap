@@ -1,60 +1,105 @@
 package com.example.newsonmap.ui.list
 
+import android.content.ContentValues
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsonmap.R
+import com.example.newsonmap.databinding.FragmentListNewsBinding
+import com.example.newsonmap.model.News
+import com.example.newsonmap.ui.details.ShowNewsDialog
+import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//private const val ARG_PARAM1 = "param1"
-//private const val ARG_PARAM2 = "param1"
+class ListNewsFragment : Fragment(), OnNewsClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ListNewsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ListNewsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString("param1")
-            param2 = it.getString("param2")
-        }
-    }
+    private lateinit var binding: FragmentListNewsBinding
+    private lateinit var adapter: NewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_news, container, false)
+        binding = FragmentListNewsBinding.inflate(layoutInflater)
+        setupRecyclerView()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListNewsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ListNewsFragment().apply {
-                arguments = Bundle().apply {
-                    putString("param1", param1)
-                    putString("param2", param2)
+    private fun setupRecyclerView() {
+        binding.rvNews.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        adapter = NewsAdapter()
+        adapter.onNewsClickListener = this
+        binding.rvNews.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateData()
+    }
+
+    private fun updateData() {
+        val db = Firebase.firestore
+        val documentReference = db.collection("news")
+        documentReference.get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        val news = News()
+                        news.title = document["title"].toString()
+                        news.description = document["description"].toString()
+                        news.address = document["address"].toString()
+                        news.latitude = document["latitude"].toString()
+                        news.longitude = document["longitude"].toString()
+                        news.time_created = document["date"].toString()
+
+                        val authorId = document["author id"].toString()
+                        val profileDocumentReference = db.collection("profile").document(authorId)
+                        profileDocumentReference.get()
+                            .addOnSuccessListener { profileDocument ->
+                                news.author = profileDocument["firstname"].toString() + profileDocument["lastname"].toString()
+
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w(ContentValues.TAG, "Error loading profile document", e)
+                            }
+
+                        val documentId = news.latitude + news.longitude
+                        val storageReference = FirebaseStorage.getInstance().reference.child("images/$documentId")
+                        val localFile = File.createTempFile("currentImage", "jpg")
+                        storageReference.getFile(localFile)
+                            .addOnSuccessListener {
+                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+                                news.imageBitmap = bitmap
+                                adapter.addNews(news)
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w(ContentValues.TAG, "Error loading image", e)
+                            }
+                    }
+                } else {
+                    Log.d(ContentValues.TAG, "No such document")
                 }
             }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "get failed with ", exception)
+            }
+
+
+
     }
+
+    override fun onNewsClick(latLng: LatLng) {
+        var dialog = ShowNewsDialog(latLng)
+        dialog.show(requireActivity().supportFragmentManager, "show dialog")
+    }
+
 }

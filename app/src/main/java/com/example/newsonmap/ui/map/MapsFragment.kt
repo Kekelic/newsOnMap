@@ -67,8 +67,6 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener, OnCr
     }
 
     private fun loadNews() {
-
-        val user = FirebaseAuth.getInstance().currentUser
         val db = Firebase.firestore
         val documentReference = db.collection("news")
         documentReference.get()
@@ -78,10 +76,7 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener, OnCr
                         val latitude = document["latitude"].toString().toDouble()
                         val longitude = document["longitude"].toString().toDouble()
                         makeMarker(LatLng(latitude , longitude))
-                        Log.d(ContentValues.TAG, "No such document")
                     }
-
-//                    binding.etAccountFirstname.setText(document["firstname"].toString())
                 } else {
                     Log.d(ContentValues.TAG, "No such document")
                 }
