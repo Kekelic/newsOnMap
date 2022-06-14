@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,6 +18,7 @@ import com.example.newsonmap.R
 import com.example.newsonmap.databinding.FragmentMapsBinding
 import com.example.newsonmap.ui.details.CreateNewsDialog
 import com.example.newsonmap.ui.details.OnCreateNewsListener
+import com.example.newsonmap.ui.details.ShowNewsDialog
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -44,13 +44,16 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener, OnCr
     private val callback = OnMapReadyCallback { googleMap ->
 
         map = googleMap
+//        map.mapType = MAP_TYPE_HYBRID
+        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.map_style))
 
         val latLng = LatLng(currentLocation?.latitude!!, currentLocation?.longitude!!)
-        val markerOption = MarkerOptions().position(latLng).title("I am here")
-            .snippet(getAddress(latLng.latitude, latLng.longitude))
+//        val markerOption = MarkerOptions().position(latLng).title("I am here")
+//            .snippet(getAddress(latLng.latitude, latLng.longitude))
         map.animateCamera(CameraUpdateFactory.newLatLng(latLng))
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        map.addMarker(markerOption)
+//        map.addMarker(markerOption)
+
         map.setOnMapClickListener(this)
         map.setOnMarkerClickListener(this)
 
@@ -148,7 +151,7 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener, OnCr
         val address = getAddress(latLng.latitude, latLng.longitude)
 
         val dialog = CreateNewsDialog(latLng, address, this)
-        dialog.show(requireActivity().supportFragmentManager, "My dialog")
+        dialog.show(requireActivity().supportFragmentManager, "create dialog")
     }
 
 
@@ -163,11 +166,8 @@ class MapsFragment : Fragment(), OnMapClickListener, OnMarkerClickListener, OnCr
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        Toast.makeText(
-            context,
-            "You clicked on marker",
-            Toast.LENGTH_SHORT
-        ).show()
+        val dialog = ShowNewsDialog(marker.position)
+        dialog.show(requireActivity().supportFragmentManager, "show dialog")
         return true
     }
 

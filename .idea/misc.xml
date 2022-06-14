@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_account_box_24.xml" value="0.1245" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2115" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.1685" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1245" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.1245" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.1685" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/news.xml" value="0.166" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/round_btn.xml" value="0.2115" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1265625" />
@@ -16,6 +18,7 @@
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/activity_maps.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_create_news.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_show_news.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_about.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_account.xml" value="0.2" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_create_news.xml" value="0.13541666666666666" />
