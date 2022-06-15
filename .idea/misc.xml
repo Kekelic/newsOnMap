@@ -23,7 +23,7 @@
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_create_news.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_show_news.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_about.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_about.xml" value="0.264" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_account.xml" value="0.2" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_create_news.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_list.xml" value="0.25416666666666665" />
@@ -34,6 +34,7 @@
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/menu/nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.148" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.148" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/xml/fileprovider.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

@@ -1,19 +1,27 @@
 package com.example.newsonmap.ui.details
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.ActivityNotFoundException
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Camera
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
 import com.example.newsonmap.databinding.DialogCreateNewsBinding
 import com.example.newsonmap.ui.MainActivity
@@ -23,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import java.io.File
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -36,6 +45,12 @@ class CreateNewsDialog(
 
     private lateinit var binding: DialogCreateNewsBinding
     private var imageUri: Uri? = null
+    private lateinit var photoFile: File
+    private val FILE_NAME = "photo"
+
+    val REQUEST_GALLERY_CODE = 100
+    val REQUEST_CAMERA_CODE = 101
+
 
 
     override fun onCreateView(
@@ -46,6 +61,7 @@ class CreateNewsDialog(
         binding = DialogCreateNewsBinding.inflate(layoutInflater)
 
         binding.ibAddImage.setOnClickListener { openGallery() }
+        binding.ibCamera.setOnClickListener { takePhoto() }
 
         binding.btnCreate.setOnClickListener { saveData() }
         binding.btnCancel.setOnClickListener { this.dismiss() }
@@ -53,16 +69,48 @@ class CreateNewsDialog(
         return binding.root
     }
 
+    private fun takePhoto() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        photoFile = getPhotoFile(FILE_NAME)
+
+        //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
+        val fileProvider = FileProvider.getUriForFile(requireContext(), "com.example.newsonmap.fileprovider", photoFile)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
+        try {
+            startActivityForResult(cameraIntent, REQUEST_CAMERA_CODE)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(requireContext(), "Camera can not be open", Toast.LENGTH_SHORT).show()
+            Log.w(ContentValues.TAG, "Camera can not be open: ", e)
+        }
+    }
+
+    private fun getPhotoFile(fileName: String): File {
+        val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(fileName, ".jpg" , storageDir )
+    }
+
     private fun openGallery() {
-        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        startActivityForResult(gallery, 100)
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        try {
+            startActivityForResult(galleryIntent, REQUEST_GALLERY_CODE)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(requireContext(), "Gallery can not be open", Toast.LENGTH_SHORT).show()
+            Log.w(ContentValues.TAG, "Gallery can not be open: ", e)
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == 100) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_GALLERY_CODE) {
             imageUri = data?.data
             binding.ivImage.setImageURI(imageUri)
+        }
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CAMERA_CODE) {
+//            val bitmap = data?.extras?.get("data") as Bitmap
+            imageUri = photoFile.absoluteFile.toUri()
+            val imageBitmap = BitmapFactory.decodeFile(photoFile.absolutePath)
+            binding.ivImage.setImageBitmap(imageBitmap)
         }
     }
 

@@ -8,10 +8,10 @@
         android:id="@+id/sv_data"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/rl_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rl_buttons">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,32 +93,46 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_toEndOf="@id/tv_add_image"
+                    android:layout_toStartOf="@id/ib_camera"
                     android:background="@drawable/round_btn"
                     android:src="@drawable/ic_baseline_add_24" />
 
-                <ImageView
-                    android:id="@+id/iv_image"
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:id="@+id/ib_camera"
+                    android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_toRightOf="@id/ib_add_image"
-                    android:src="@drawable/ic_baseline_image_24" />
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/round_btn"
+                    android:src="@drawable/ic_baseline_photo_camera_24" />
 
             </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_baseline_image_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_add_image"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 
-    <!--        <View-->
-    <!--            android:id="@+id/v_line"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="1dp"-->
-    <!--            android:background="@color/black"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toBottomOf="@id/rl_add_image" />-->
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/rl_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RelativeLayout
         android:id="@+id/rl_buttons"
