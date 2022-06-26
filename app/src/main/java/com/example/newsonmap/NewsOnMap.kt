@@ -1,15 +1,19 @@
 package com.example.newsonmap
 
 import android.app.Application
+import android.content.Context
 
-class NewsOnMap: Application() {
+class NewsOnMap : Application() {
+
+    companion object {
+        lateinit var ApplicationContext: Context private set
+
+    }
 
     override fun onCreate() {
         super.onCreate()
-        application = this
+        ApplicationContext = this
     }
 
-    companion object{
-        lateinit var application: Application
-    }
+
 }

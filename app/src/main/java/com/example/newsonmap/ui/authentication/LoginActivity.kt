@@ -17,70 +17,54 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvRegister.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-        }
+        title = "Login"
 
+        binding.tvRegister.setOnClickListener { startRegisterActivity() }
+
+        binding.btnLogin.setOnClickListener { login() }
 
         val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser!= null){
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//            intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
-//            intent.putExtra("email_id", FirebaseAuth.getInstance().currentUser!!.email)
-            startActivity(intent)
-            finish()
+        if (currentUser != null) {
+            startMainActivity()
         }
-        login()
 
     }
 
     private fun login() {
-        binding.btnLogin.setOnClickListener {
-            when {
-                TextUtils.isEmpty(binding.etLoginEmail.text.toString().trim { it <= ' ' }) -> {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Please enter email.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                TextUtils.isEmpty(
-                    binding.etLoginPassword.text.toString().trim { it <= ' ' }) -> {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Please enter password.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                else -> {
-                    val email: String = binding.etLoginEmail.text.toString().trim { it <= ' ' }
-                    val password: String =
-                        binding.etLoginPassword.text.toString().trim { it <= ' ' }
+        val email = binding.etLoginEmail.text.toString().trim { it <= ' ' }
+        val password = binding.etLoginPassword.text.toString().trim { it <= ' ' }
 
-                    //Log-In Using FirebaseAuth
-                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful){
-                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
-//                                intent.putExtra("email_id", email)
-                                startActivity(intent)
-                                finish()
-                            }else{
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    task.exception!!.message.toString(),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+        when {
+            TextUtils.isEmpty(email) -> {
+                makeToast("Please enter email.")
+            }
+            TextUtils.isEmpty(password) -> {
+                makeToast("Please enter password.")
+            }
+            else -> {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            startMainActivity()
+                        } else {
+                            makeToast(task.exception!!.message.toString())
                         }
-
-
-                }
-
+                    }
             }
         }
+    }
 
+    private fun makeToast(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun startMainActivity() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun startRegisterActivity() {
+        val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -5,7 +5,47 @@
     <string name="close">Close</string>
     <string name="hello_blank_fragment">Hello list</string>
     <string name="about_title">About this application</string>
-    <string name="create_title">Creating event at location</string>
+    <string name="create_title">Creating news</string>
     <string name="add_image">Add image:</string>
+    <string name="login_account">LOGIN ACCOUNT</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
+    <string name="register_account">REGISTER ACCOUNT</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="change_your_account_information">Change your account information</string>
+    <string name="current_password">Current password</string>
+    <string name="save_changes">save changes</string>
+    <string name="title">Title</string>
+    <string name="author">Author:</string>
+    <string name="location">Location:</string>
+    <string name="logo_text">NEWS ON MAP</string>
+    <string name="app_description">The application is used for tracking news like events, ads and information that occur primarily in the user\'s environment, but does not prevent them from reading in other environments. Unlike other apps that offer news reading, here users create their own news.</string>
+    <string name="author_text">Author: Stjepan Kekelić</string>
+    <string name="date_and_place_text">FERIT, Osijek 2022.</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
+    <string name="type">Type</string>
+    <string name="description">Description</string>
+    <string name="news_title">News title</string>
+    <string name="address">Address:</string>
+    <string name="creation_time">Creation time:</string>
+    <string name="map">Map</string>
+    <string name="list">List</string>
+    <string name="about">About</string>
+    <string name="profile">Profile</string>
+    <string name="account_info">Account info</string>
+    <string name="logout">Logout</string>
+
+
+    <string-array name="news_types">
+        <item>EVENT</item>
+        <item>AD</item>
+        <item>INFO</item>
+    </string-array>
 
 </resources>

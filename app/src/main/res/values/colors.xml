@@ -12,4 +12,7 @@
     <color name="orange_logo">#F66B0E</color>
     <color name="blue_logo">#205375</color>
     <color name="black_logo">#112B3C</color>
+    <color name="light_orange">#10F66B0E</color>
+    <color name="field_gray">#e0e0e0</color>
+
 </resources>

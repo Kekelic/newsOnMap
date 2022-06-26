@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_logo"
     tools:context=".ui.authentication.RegisterActivity">
 
     <ImageView
         android:id="@+id/iv_header_image"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_height="120dp"
+        android:background="@drawable/ic_launcher_background_logo"
+        android:src="@drawable/ic_launcher_foreground_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="REGISTER SCREEN"
-        android:textColor="#222934"
+        android:text="@string/register_account"
+        android:textColor="@color/black_logo"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +37,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="16dp"
-        android:hint="Firstname"
+        android:hint="@string/firstname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title">
@@ -52,9 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:hint="Lastname"
+        android:hint="@string/lastname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_register_firstname">
@@ -71,9 +73,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:hint="Email"
+        android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_register_lastname">
@@ -82,8 +84,7 @@
             android:id="@+id/et_register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:text="abc@gmail.com" />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,7 +95,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:hint="Password"
+        android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_register_email">
@@ -103,24 +104,19 @@
             android:id="@+id/et_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:text="123456" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/teal_200"
-        android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
-        android:text="REGISTER"
-        android:textColor="@color/white"
+        android:text="@string/register"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +138,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Already have an account?" />
+            android:text="@string/already_have_an_account"
+            android:textColor="@color/black_logo"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tv_login"
@@ -150,10 +148,9 @@
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
             android:padding="5dp"
-            android:text="Login"
+            android:text="@string/login"
+            android:textColor="@color/black_logo"
             android:textStyle="bold" />
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

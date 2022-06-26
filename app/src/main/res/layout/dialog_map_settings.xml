@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_logo">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_launcher_background_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Map settings"
+            android:textColor="@color/black_logo"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+
+
+    <View
+        android:id="@+id/v_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:background="@color/black_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_title" />
+
+    <TextView
+        android:id="@+id/tv_map_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:text="Choose Map mode:"
+        android:textSize="16sp"
+        android:textColor="@color/black_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_top_line" />
+
+    <RadioGroup
+        android:id="@+id/rg_map_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_map_mode">
+
+        <RadioButton
+            android:id="@+id/rb_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="normal" />
+
+        <RadioButton
+            android:id="@+id/rb_hybrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hybrid" />
+
+        <RadioButton
+            android:id="@+id/rb_terrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="terrain" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_last_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:text="Show the last news in:"
+        android:textSize="16sp"
+        android:textColor="@color/black_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rg_map_mode" />
+
+    <RadioGroup
+        android:id="@+id/rg_last_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_last_news">
+
+        <RadioButton
+            android:id="@+id/rb_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="week" />
+
+        <RadioButton
+            android:id="@+id/rb_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="day" />
+
+        <RadioButton
+            android:id="@+id/rb_half_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 hours" />
+    </RadioGroup>
+
+
+    <View
+        android:id="@+id/v_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rg_last_news"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_orange"
+        app:layout_constraintTop_toBottomOf="@id/v_bottom_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/cancel"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:text="save"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

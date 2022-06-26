@@ -11,18 +11,27 @@
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1245" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.1245" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.1685" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1665" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.1665" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1665" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_baseline_view_list_24.xml" value="0.1665" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_launcher_background.xml" value="0.148" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/ic_launcher_foreground_logo.xml" value="0.148" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/item_border.xml" value="0.1665" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/news.xml" value="0.166" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/drawable/round_btn.xml" value="0.2115" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout-v26/fragment_about.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1265625" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout-w936dp/activity_login.xml" value="0.11065573770491803" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/activity_maps.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/activity_register.xml" value="0.2" />
-        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_create_news.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_create_news.xml" value="0.264" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_map_setting.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_map_settings.xml" value="0.225" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dialog_show_news.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/dropdown_item_types.xml" value="0.23177083333333334" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_about.xml" value="0.264" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_account.xml" value="0.2" />
         <entry key="..\:/Users/Stjepan/AndroidStudioProjects/NewsOnMap/app/src/main/res/layout/fragment_create_news.xml" value="0.13541666666666666" />

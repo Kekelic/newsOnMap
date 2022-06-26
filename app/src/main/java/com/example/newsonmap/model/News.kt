@@ -8,9 +8,8 @@ data class News(
     var address: String = "",
     var latitude: String = "",
     var longitude: String = "",
-    var time_created: String = "",
-    var author: String = "",
-    var imageBitmap: Bitmap? = null
-) {
-
-}
+    var timeCreated: String = "",
+    var authorName: String = "",
+    var imageBitmap: Bitmap? = null,
+    var type: NewsType = NewsType.INFO
+)

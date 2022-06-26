@@ -9,11 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsonmap.R
 import com.example.newsonmap.databinding.FragmentListNewsBinding
 import com.example.newsonmap.model.News
+import com.example.newsonmap.model.NewsType
 import com.example.newsonmap.ui.details.ShowNewsDialog
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -27,9 +28,10 @@ class ListNewsFragment : Fragment(), OnNewsClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListNewsBinding.inflate(layoutInflater)
         setupRecyclerView()
+        fetchData()
         return binding.root
     }
 
@@ -41,14 +43,10 @@ class ListNewsFragment : Fragment(), OnNewsClickListener {
         binding.rvNews.adapter = adapter
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateData()
-    }
 
-    private fun updateData() {
+    private fun fetchData() {
         val db = Firebase.firestore
-        val documentReference = db.collection("news")
+        val documentReference = db.collection("news").orderBy("date", Query.Direction.DESCENDING)
         documentReference.get()
             .addOnSuccessListener { documents ->
                 if (documents != null) {
@@ -59,14 +57,14 @@ class ListNewsFragment : Fragment(), OnNewsClickListener {
                         news.address = document["address"].toString()
                         news.latitude = document["latitude"].toString()
                         news.longitude = document["longitude"].toString()
-                        news.time_created = document["date"].toString()
+                        news.timeCreated = document["date"].toString()
+                        news.type = NewsType.valueOf(document["type"].toString())
 
                         val authorId = document["author id"].toString()
                         val profileDocumentReference = db.collection("profile").document(authorId)
                         profileDocumentReference.get()
                             .addOnSuccessListener { profileDocument ->
-                                news.author = profileDocument["firstname"].toString() + profileDocument["lastname"].toString()
-
+                                news.authorName = "${profileDocument["firstname"]}  ${profileDocument["lastname"].toString()}"
                             }
                             .addOnFailureListener { e ->
                                 Log.w(ContentValues.TAG, "Error loading profile document", e)
@@ -82,6 +80,7 @@ class ListNewsFragment : Fragment(), OnNewsClickListener {
                                 adapter.addNews(news)
                             }
                             .addOnFailureListener { e ->
+                                adapter.addNews(news)
                                 Log.w(ContentValues.TAG, "Error loading image", e)
                             }
                     }
@@ -98,8 +97,8 @@ class ListNewsFragment : Fragment(), OnNewsClickListener {
     }
 
     override fun onNewsClick(latLng: LatLng) {
-        var dialog = ShowNewsDialog(latLng)
-        dialog.show(requireActivity().supportFragmentManager, "show dialog")
+        val dialog = ShowNewsDialog(latLng)
+        dialog.show(requireActivity().supportFragmentManager, "show news dialog")
     }
 
 }

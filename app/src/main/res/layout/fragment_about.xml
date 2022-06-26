@@ -4,8 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background_logo"
+    android:background="@color/white_logo"
     tools:context=".ui.about.AboutFragment">
+
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/ic_launcher_background_logo"
+        android:src="@drawable/ic_launcher_foreground_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_logo_text"
@@ -13,47 +24,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/mistral"
-        android:text="NEWS ON MAP"
+        android:text="@string/logo_text"
+        android:textColor="@color/black_logo"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_launcher_background_logo"
-        android:src="@drawable/ic_launcher_foreground_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_logo_text" />
-
+        app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
 
     <TextView
         android:id="@+id/tv_app_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="The application is used for tracking notifications, events or news that occur primarily in the user's environment, but does not prevent them from reading in other environments. Unlike other apps that offer news reading, here users create their own news."
+        android:text="@string/app_description"
+        android:textColor="@color/black_logo"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+        app:layout_constraintTop_toBottomOf="@id/tv_logo_text" />
 
     <TextView
         android:id="@+id/tv_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Author: Stjepan Kekelić"
+        android:text="@string/author_text"
+        android:textColor="@color/black_logo"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,15 +65,16 @@
         android:id="@+id/tv_date_and_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
-        android:textStyle="bold"
-        android:text="FERIT, Osijek 2022."
+        android:layout_marginBottom="20dp"
+        android:text="@string/date_and_place_text"
+        android:textColor="@color/black_logo"
         android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,30 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_logo"
     tools:context=".ui.authentication.LoginActivity">
 
     <ImageView
         android:id="@+id/iv_header_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:background="@drawable/ic_launcher_background_logo"
+        android:src="@drawable/ic_launcher_foreground_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_foreground"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="LOGIN SCREEN"
-        android:textColor="#222934"
+        android:text="@string/login_account"
+        android:textColor="@color/black_logo"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_header_image"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_header_image" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -37,16 +38,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="16dp"
-        android:hint="Email Id"
+        android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title">
+
         <EditText
             android:id="@+id/et_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:text="abc@gmail.com"/>
+            android:text="abc@gmail.com" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,37 +59,34 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:hint="Password"
+        android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_login_email">
+
         <EditText
             android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:text="123456"/>
+            android:text="123456" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/teal_200"
-        android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
-        android:text="Login"
-        android:textColor="@color/white"
+        android:text="@string/login"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_login_password"/>
+        app:layout_constraintTop_toBottomOf="@id/til_login_password" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -104,7 +103,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Don't have an account?"/>
+            android:text="@string/don_t_have_an_account"
+            android:textColor="@color/black_logo"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tv_register"
@@ -112,8 +113,9 @@
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
             android:padding="5dp"
-            android:text="Register"
-            android:textStyle="bold"/>
+            android:text="@string/register"
+            android:textColor="@color/black_logo"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
