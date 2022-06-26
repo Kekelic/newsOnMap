@@ -8,6 +8,7 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.example.newsonmap.R
 import com.example.newsonmap.ui.MainActivity
+import com.example.newsonmap.ui.authentication.LoginActivity
 
 const val notificationID = 1
 const val channelID = "channel1"
@@ -18,7 +19,7 @@ class Notification : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
-        val repeatingIntent = Intent(context, MainActivity::class.java)
+        val repeatingIntent = Intent(context, LoginActivity::class.java)
         repeatingIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         val pendingIntent = PendingIntent.getActivity(

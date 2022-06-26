@@ -44,11 +44,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-//        val preferenceManager = PreferenceManager()
-//        if (!(preferenceManager.isNotificationSet())) {
-//
-//        }
         createNotificationChannel()
         startNotificationProcess()
 
@@ -96,9 +91,6 @@ class MainActivity : AppCompatActivity() {
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
-
-//        val preferenceManager = PreferenceManager()
-//        preferenceManager.updateNotificationSet()
     }
 
 
