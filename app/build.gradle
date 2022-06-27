@@ -61,6 +61,6 @@ dependencies {
     implementation firebase_auth_ktx
     implementation firebase_database
     implementation firebase_firestore_ktx
-    implementation firebase_firestore_ktx
+    implementation firebase_storage_ktx
 
 }
